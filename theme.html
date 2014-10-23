@@ -4,9 +4,14 @@
     <meta charset="utf-8">
     <title>
       {% if is_login %}Login
-      {% elif is_home %}{{ site.author }}
+      {% elif is_home %}{{ site.author }} - Tech Entrepreneur & Web Developer
       {% elif is_tag %}{{ tag }} | {{ site.title }}
-      {% elif post %}{{ post.title }} by Matt West
+      {% elif post %}
+        {% if post.type == 'page' %}
+          {{ post.title }}
+        {% else %}
+          {{ post.title }} by Matt West
+        {% end %}
       {% endif %}
     </title>
 
