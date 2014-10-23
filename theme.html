@@ -5,10 +5,9 @@
     <title>
       {% if is_login %}Login
       {% elif is_home %}{{ site.author }}
-      {% elif is_tag %}{{ tag }}
-      {% elif post %}{{ post.title }}
+      {% elif is_tag %}{{ tag }} | {{ site.title }}
+      {% elif post %}{{ post.title }} by Matt West
       {% endif %}
-      by Matt West
     </title>
 
     {{ header_meta }}
