@@ -132,7 +132,7 @@
       <div class="span6 offset1 posts">
 
           {% if is_tag %}
-          <h4 class="sub-heading span6">Showing all posts tagged {{ tag }}:</h4>
+          <h4 class="sub-heading span6">Showing all posts tagged {{ tag|format_tag(link=False, humanize=True) }}:</h4>
           {% endif %}
 
           {% if posts %}
@@ -172,6 +172,7 @@
       <div class="span6 offset1 posts">
         <div class="post whole span6">
           <h1>{{ post.title }}</h1>
+          {% if post.type == 'post' %}
           <div class="post-info">
             <div class="info-left">
               <p class="date">{{ post.created_at|format_date }}</p>
@@ -182,6 +183,7 @@
               </p>
             </div>
           </div>
+          {% endif %}
           <div class="post-body">
             <div class="post-content" data-type-cleanup="true">
               {{ post.content }}
@@ -205,18 +207,20 @@
             <p class="back"><a href="/">&laquo; Go Back</a></p>
           </div>
           {% if site.disqus %}
-          <div class="post-comments">
-            <div id="disqus_thread"></div>
-            <script>
-              var disqus_shortname = '{{ site.disqus }}';
-              var disqus_url = '{{site.base_url}}{{ post.permalink }}';
-              (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-              })();
-            </script>
-          </div>
+            {% if post.type == 'post' %}
+              <div class="post-comments">
+                <div id="disqus_thread"></div>
+                <script>
+                  var disqus_shortname = '{{ site.disqus }}';
+                  var disqus_url = '{{site.base_url}}{{ post.permalink }}';
+                  (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+                </script>
+              </div>
+            {% endif %}
           {% endif %}
         </div>
       </div>
