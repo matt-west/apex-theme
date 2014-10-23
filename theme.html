@@ -5,7 +5,7 @@
     <title>
       {% if is_login %}Login
       {% elif is_home %}{{ site.author }} - Tech Entrepreneur & Web Developer
-      {% elif is_tag %}{{ tag }} | {{ site.title }}
+      {% elif is_tag %}{{ tag }} | Matt West's Blog
       {% elif post %}
         {% if post.type == 'page' %}
           {{ post.title }}
